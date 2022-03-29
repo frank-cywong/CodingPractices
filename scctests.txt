@@ -1,0 +1,32 @@
+TEST 1:
+5
+5
+0 2
+2 1
+1 0
+0 3
+3 4
+Strongly connected component: 0 1 2
+Strongly connected component: 3
+Strongly connected component: 4
+
+TEST 2:
+8
+14
+0 1
+1 4
+4 0
+4 5
+1 5
+5 6
+6 5
+1 2
+2 6
+7 6
+2 3
+3 2
+3 7
+7 3
+Strongly connected component: 0 4 1
+Strongly connected component: 2 3 7
+Strongly connected component: 5 6
