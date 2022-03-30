@@ -2,6 +2,7 @@
 #include <vector>
 #include <functional>
 #include <climits>
+#include <string>
 
 using namespace std;
 
@@ -15,12 +16,24 @@ struct SEGTREE{
 		opfunc = operatorfunction;
 		data = vector<int>(2*N, identityval);
 	}
+	/*
+	void debugprint(){
+		string s = "[";
+		for(auto it = data.begin(); it != data.end(); it++){
+			if(it != data.begin()){
+				s += ", ";
+			}
+			s += to_string(*it);
+		}
+		cout << s << endl;
+	}
+	*/
 	void update(int index, int val){
 		index += N;
 		data[index] = val;
 		index /= 2;
 		while(index > 0){
-			data[index] = data[2*index] + data[2*index+1];
+			data[index] = opfunc(data[2*index], data[2*index+1]);
 			index /= 2;
 		}
 	}
@@ -59,11 +72,14 @@ int main(){ // tested using https://cses.fi/problemset/task/1649
 		segtree.update(i, temp);
 	}
 	for(int i = 0; i < Q; i++){
+		//segtree.debugprint();
 		int opcode, argone, argtwo;
 		cin >> opcode >> argone >> argtwo;
+		argone--;
 		if(opcode == 1){
 			segtree.update(argone, argtwo);
 		} else {
+			argtwo--;
 			cout << segtree.query(argone, argtwo) << endl;
 		}
 	}
